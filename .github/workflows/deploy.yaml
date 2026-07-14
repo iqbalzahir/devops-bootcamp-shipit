@@ -3,6 +3,15 @@ on: [push, workflow_dispatch]
 jobs:
   say-hello:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: launchpad
     steps:
-      - run: sleep 30
-      - run: echo "Ship it!"
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+      - run: npm clean install
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: launchpad/dist
+      - uses: actions/deploy-pages@v5
