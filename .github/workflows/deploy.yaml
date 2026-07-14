@@ -3,6 +3,10 @@ on: [push, workflow_dispatch]
 jobs:
   say-hello:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     defaults:
       run:
         working-directory: launchpad
